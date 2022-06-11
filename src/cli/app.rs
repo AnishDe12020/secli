@@ -9,7 +9,7 @@ pub enum Command {
 }
 
 pub struct App {
-    db_path: PathBuf,
+    pub db_path: PathBuf,
 }
 
 pub fn get_config_path() -> PathBuf {
@@ -28,7 +28,7 @@ impl App {
     #[must_use]
     pub fn new() -> Self {
         Self {
-            db_path: PathBuf::from("test.db"),
+            db_path: PathBuf::from("secli.db"),
         }
     }
 
