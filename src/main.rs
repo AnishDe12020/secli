@@ -1,7 +1,9 @@
-use config::Config;
+use anyhow::Result;
+use cli::app::App;
 
 pub mod cli;
+pub mod core;
 
-fn main() {
-    println!("Hello, world!");
+fn main() -> Result<()> {
+    App::new().run()
 }
