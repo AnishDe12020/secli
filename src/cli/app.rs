@@ -1,6 +1,6 @@
 use crate::core::commands::{add::add, get::get};
 use anyhow::Result;
-use clap::{Command as ClapCommand, Values};
+use clap::{Arg, Command as ClapCommand, Values};
 use std::{path::PathBuf, process::exit};
 
 pub enum Command {
@@ -36,7 +36,11 @@ impl App {
         ClapCommand::new("secli")
             .about("A CLI in Rust to store secrets")
             .subcommand(ClapCommand::new("add").about("Add a secret"))
-            .subcommand(ClapCommand::new("get").about("Get a secret"))
+            .subcommand(
+                ClapCommand::new("get")
+                    .about("Get a secret")
+                    .arg(Arg::new("name").takes_value(true).index(1)),
+            )
     }
 
     fn get_command(&self) -> Command {
@@ -46,7 +50,7 @@ impl App {
 
         match matches.subcommand() {
             Some(("add", _)) => Command::Add(None),
-            Some(("get", _)) => Command::Get(None),
+            Some(("get", sub)) => Command::Get(sub.values_of("name")),
             _ => {
                 println!("No command specified");
                 exit(1);

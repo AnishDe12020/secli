@@ -4,12 +4,17 @@ use clap::Values;
 use inquire::Text;
 use rusqlite::Connection;
 
-pub fn get(app: App, _args: Option<Values>) -> Result<()> {
+pub fn get(app: App, args: Option<Values<'_>>) -> Result<()> {
     let conn = Connection::open(app.db_path).unwrap();
 
-    let name = Text::new("Enter the name/key for the secret: ")
-        .prompt()
-        .unwrap();
+    let mut args = args.unwrap_or_default();
+    let name: String;
+
+    if args.len() == 0 {
+        name = Text::new("Name").prompt().unwrap();
+    } else {
+        name = args.next().unwrap().to_string();
+    }
 
     let value = get_secret(&conn, &name)?;
 
