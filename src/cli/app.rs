@@ -39,11 +39,19 @@ impl App {
     fn build(&self) -> ClapCommand {
         ClapCommand::new("secli")
             .about("A CLI in Rust to store secrets")
-            .subcommand(ClapCommand::new("add").about("Add a secret"))
+            .subcommand(
+                ClapCommand::new("add")
+                    .about("Add a secret")
+                    .alias("new")
+                    .alias("insert")
+                    .alias("create"),
+            )
             .subcommand(
                 ClapCommand::new("get")
                     .about("Get a secret")
-                    .arg(Arg::new("name").takes_value(true).index(1)),
+                    .arg(Arg::new("name").takes_value(true).index(1))
+                    .alias("read")
+                    .alias("show"),
             )
             .subcommand(
                 ClapCommand::new("list")
