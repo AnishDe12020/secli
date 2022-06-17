@@ -46,10 +46,20 @@ pub struct Secret {
 }
 
 pub fn insert_secret(conn: &Connection, secret: &Secret) -> Result<()> {
-    conn.execute(
+    match conn.execute(
         "INSERT INTO secrets (name, value) VALUES (?1, ?2)",
         [&secret.name, &secret.value],
-    )?;
+    ) {
+        Ok(_) => {}
+        Err(err) => {
+            let err_string = err.to_string();
+            if err_string.contains("UNIQUE constraint failed") {
+                bail!("Secret with name {} already exists", secret.name.cyan());
+            } else {
+                bail!("{}", err_string);
+            }
+        }
+    }
     Ok(())
 }
 

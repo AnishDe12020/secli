@@ -2,6 +2,7 @@ use crate::cli::app::App;
 use crate::core::db::{insert_secret, Secret};
 use anyhow::Result;
 use clap::Values;
+use colored::Colorize;
 use inquire::Text;
 use rusqlite::Connection;
 
@@ -18,7 +19,24 @@ pub fn add(app: App, _args: Option<Values>) -> Result<()> {
 
     let secret = Secret { name, value };
 
-    insert_secret(&conn, &secret)?;
+    match insert_secret(&conn, &secret) {
+        Ok(_) => {
+            println!(
+                "{}",
+                format!(
+                    "Secret with name {}{}{} added successfully",
+                    "`".yellow(),
+                    secret.name.cyan(),
+                    "`".yellow()
+                )
+                .green(),
+            );
+        }
+        Err(err) => {
+            println!("{}", err.to_string().red());
+            return Ok(());
+        }
+    }
 
     Ok(())
 }
