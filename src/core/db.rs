@@ -1,5 +1,42 @@
+use std::{fs::create_dir_all, path::PathBuf};
+
 use anyhow::Result;
+use clap::crate_name;
 use rusqlite::Connection;
+
+pub fn get_data_path() -> PathBuf {
+    let data_dir = dirs::data_dir().unwrap();
+    let secli_dir = data_dir.join(format!("{}", crate_name!()));
+    secli_dir
+}
+
+pub fn get_db_path() -> PathBuf {
+    let db_path = get_data_path().join("secli.db");
+    db_path
+}
+
+pub fn create_db() {
+    let seclir_dir = get_data_path();
+    let db_path = seclir_dir.join("secli.db");
+    if db_path.exists() {
+        return;
+    }
+
+    create_dir_all(seclir_dir).unwrap();
+
+    let conn = Connection::open(db_path).unwrap();
+
+    conn.execute(
+        "
+        CREATE TABLE IF NOT EXISTS secrets (
+            name TEXT PRIMARY KEY,
+            value TEXT
+        )
+        ",
+        [],
+    )
+    .unwrap();
+}
 
 #[derive(Debug)]
 pub struct Secret {

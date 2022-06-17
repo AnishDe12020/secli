@@ -1,4 +1,7 @@
-use crate::core::commands::{add::add, get::get};
+use crate::core::{
+    commands::{add::add, get::get},
+    db::get_db_path,
+};
 use anyhow::Result;
 use clap::{Arg, Command as ClapCommand, Values};
 use std::{path::PathBuf, process::exit};
@@ -28,7 +31,7 @@ impl App {
     #[must_use]
     pub fn new() -> Self {
         Self {
-            db_path: PathBuf::from("secli.db"),
+            db_path: PathBuf::from(get_db_path()),
         }
     }
 

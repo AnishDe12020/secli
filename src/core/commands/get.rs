@@ -11,7 +11,7 @@ pub fn get(app: App, args: Option<Values<'_>>) -> Result<()> {
     let name: String;
 
     if args.len() == 0 {
-        name = Text::new("Name").prompt().unwrap();
+        name = Text::new("Name:").prompt().unwrap();
     } else {
         name = args.next().unwrap().to_string();
     }
