@@ -10,6 +10,7 @@ anyhow = "1.0.57"
 dirs = "4.0.0"
 rusqlite = { version = "0.27.0", features = ["bundled"] }
 inquire = "0.2.1"
+colored = "2.0.0"
 
 [dependencies.clap]
 version = "3.1.18"
