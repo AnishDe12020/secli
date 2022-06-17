@@ -1,5 +1,5 @@
 use crate::core::{
-    commands::{add::add, get::get},
+    commands::{add::add, get::get, list::list},
     db::get_db_path,
 };
 use anyhow::Result;
@@ -9,6 +9,7 @@ use std::{path::PathBuf, process::exit};
 pub enum Command {
     Add(Option<Values<'static>>),
     Get(Option<Values<'static>>),
+    List(Option<Values<'static>>),
 }
 
 pub struct App {
@@ -44,6 +45,11 @@ impl App {
                     .about("Get a secret")
                     .arg(Arg::new("name").takes_value(true).index(1)),
             )
+            .subcommand(
+                ClapCommand::new("list")
+                    .about("List all secrets")
+                    .alias("ls"),
+            )
     }
 
     fn get_command(&self) -> Command {
@@ -54,6 +60,7 @@ impl App {
         match matches.subcommand() {
             Some(("add", _)) => Command::Add(None),
             Some(("get", sub)) => Command::Get(sub.values_of("name")),
+            Some(("list", _)) => Command::List(None),
             _ => {
                 println!("No command specified");
                 exit(1);
@@ -67,6 +74,7 @@ impl App {
         match command {
             Command::Add(args) => add(self, args),
             Command::Get(args) => get(self, args),
+            Command::List(args) => list(self, args),
         }
     }
 }

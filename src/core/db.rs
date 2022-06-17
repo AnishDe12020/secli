@@ -61,7 +61,7 @@ pub fn get_secret(conn: &Connection, name: &str) -> Result<String> {
 }
 
 pub fn get_secrets(conn: &Connection) -> Result<Vec<Secret>> {
-    let mut st = conn.prepare("SELECT name, value FROm secrets").unwrap();
+    let mut st = conn.prepare("SELECT name, value FROM secrets").unwrap();
 
     let iter = st.query_map([], |row| {
         Ok(Secret {
