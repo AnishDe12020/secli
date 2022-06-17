@@ -1,7 +1,8 @@
 use std::{fs::create_dir_all, path::PathBuf};
 
-use anyhow::Result;
+use anyhow::{bail, Result};
 use clap::crate_name;
+use colored::Colorize;
 use rusqlite::Connection;
 
 pub fn get_data_path() -> PathBuf {
@@ -55,7 +56,12 @@ pub fn insert_secret(conn: &Connection, secret: &Secret) -> Result<()> {
 pub fn get_secret(conn: &Connection, name: &str) -> Result<String> {
     let mut stmt = conn.prepare("SELECT value FROM secrets WHERE name = ?1")?;
     let mut rows = stmt.query(&[&name])?;
-    let row = rows.next()?.unwrap();
+
+    let row = match rows.next()? {
+        Some(row) => row,
+        None => bail!("Secret with name {} not found", name.cyan()),
+    };
+
     let value: String = row.get(0)?;
     Ok(value)
 }
