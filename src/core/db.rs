@@ -7,13 +7,11 @@ use rusqlite::Connection;
 
 pub fn get_data_path() -> PathBuf {
     let data_dir = dirs::data_dir().unwrap();
-    let secli_dir = data_dir.join(format!("{}", crate_name!()));
-    secli_dir
+    data_dir.join(crate_name!())
 }
 
 pub fn get_db_path() -> PathBuf {
-    let db_path = get_data_path().join("secli.db");
-    db_path
+    get_data_path().join("secli.db")
 }
 
 pub fn create_db() {

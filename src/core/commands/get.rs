@@ -9,13 +9,12 @@ pub fn get(app: App, args: Option<Values<'_>>) -> Result<()> {
     let conn = Connection::open(app.db_path).unwrap();
 
     let mut args = args.unwrap_or_default();
-    let name: String;
 
-    if args.len() == 0 {
-        name = Text::new("Name:").prompt().unwrap();
+    let name: String = if args.len() == 0 {
+        Text::new("Name:").prompt().unwrap()
     } else {
-        name = args.next().unwrap().to_string();
-    }
+        args.next().unwrap().to_string()
+    };
 
     let value = match get_secret(&conn, &name) {
         Ok(value) => value,

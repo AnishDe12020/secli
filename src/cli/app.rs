@@ -21,12 +21,6 @@ pub struct App {
     pub db_path: PathBuf,
 }
 
-pub fn get_config_path() -> PathBuf {
-    let config_dir = dirs::config_dir().unwrap();
-    let config_path = config_dir.join("config.json");
-    return config_path;
-}
-
 impl Default for App {
     fn default() -> Self {
         Self::new()
@@ -37,7 +31,7 @@ impl App {
     #[must_use]
     pub fn new() -> Self {
         Self {
-            db_path: PathBuf::from(get_db_path()),
+            db_path: get_db_path(),
         }
     }
 
