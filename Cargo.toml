@@ -1,7 +1,19 @@
 [package]
 name = "secli"
+description = "A simple CLI to store secrets locally and retrieve them via the CLI"
+repository = "https://github.com/AnishDe12020/secli"
+authors = ["Anish De <contact@anishde.dev>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/AnishDe12020/secli#readme"
+keywords = ["secrets", "keys", "secret-management"]
+categories = ["command-line-utilities", "command-line-interface"]
 version = "0.1.0"
 edition = "2021"
+
+[[bin]]
+name = "secli"
+path = "src/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -3,7 +3,10 @@ use crate::core::{
     db::get_db_path,
 };
 use anyhow::Result;
-use clap::{Arg, Command as ClapCommand, Values};
+use clap::{
+    crate_authors, crate_description, crate_name, crate_version, Arg, Command as ClapCommand,
+    Values,
+};
 use std::{path::PathBuf, process::exit};
 
 pub enum Command {
@@ -39,8 +42,10 @@ impl App {
     }
 
     fn build(&self) -> ClapCommand {
-        ClapCommand::new("secli")
-            .about("A CLI in Rust to store secrets")
+        ClapCommand::new(crate_name!())
+            .version(crate_version!())
+            .author(crate_authors!())
+            .about(crate_description!())
             .subcommand(
                 ClapCommand::new("add")
                     .about("Add a secret")
