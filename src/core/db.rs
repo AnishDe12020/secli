@@ -105,3 +105,14 @@ pub fn get_secrets(conn: &Connection) -> Result<Vec<Secret>> {
     }
     Ok(secrets)
 }
+
+pub fn delete_secret(conn: &Connection, name: &str) -> Result<()> {
+    match conn.execute("DELETE FROM secrets WHERE name = ?1", [&name]) {
+        Ok(_) => {}
+        Err(err) => {
+            bail!("{}", err.to_string())
+        }
+    }
+
+    Ok(())
+}
