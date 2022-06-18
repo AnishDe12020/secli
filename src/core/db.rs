@@ -63,6 +63,19 @@ pub fn insert_secret(conn: &Connection, secret: &Secret) -> Result<()> {
     Ok(())
 }
 
+pub fn update_secret(conn: &Connection, secret: &Secret) -> Result<()> {
+    match conn.execute(
+        "UPDATE secrets SET value = ?1 WHERE name = ?2",
+        [&secret.value, &secret.name],
+    ) {
+        Ok(_) => {}
+        Err(err) => {
+            bail!("{}", err.to_string())
+        }
+    }
+    Ok(())
+}
+
 pub fn get_secret(conn: &Connection, name: &str) -> Result<String> {
     let mut stmt = conn.prepare("SELECT value FROM secrets WHERE name = ?1")?;
     let mut rows = stmt.query(&[&name])?;

@@ -1,5 +1,5 @@
 use crate::core::{
-    commands::{add::add, get::get, list::list},
+    commands::{add::add, get::get, list::list, update::update},
     db::get_db_path,
 };
 use anyhow::Result;
@@ -10,6 +10,7 @@ pub enum Command {
     Add(Option<Values<'static>>),
     Get(Option<Values<'static>>),
     List(Option<Values<'static>>),
+    Update(Option<Values<'static>>),
 }
 
 pub struct App {
@@ -58,6 +59,7 @@ impl App {
                     .about("List all secrets")
                     .alias("ls"),
             )
+            .subcommand(ClapCommand::new("update").about("Upate a secret"))
     }
 
     fn get_command(&self) -> Command {
@@ -69,6 +71,7 @@ impl App {
             Some(("add", _)) => Command::Add(None),
             Some(("get", sub)) => Command::Get(sub.values_of("name")),
             Some(("list", _)) => Command::List(None),
+            Some(("update", _)) => Command::Update(None),
             _ => {
                 println!("No command specified");
                 exit(1);
@@ -83,6 +86,7 @@ impl App {
             Command::Add(args) => add(self, args),
             Command::Get(args) => get(self, args),
             Command::List(args) => list(self, args),
+            Command::Update(args) => update(self, args),
         }
     }
 }
