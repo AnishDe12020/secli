@@ -43,6 +43,7 @@ impl App {
             .subcommand(
                 ClapCommand::new("add")
                     .about("Add a secret")
+                    .arg(Arg::new("name").takes_value(true).index(1))
                     .alias("new")
                     .alias("insert")
                     .alias("create"),
@@ -59,7 +60,11 @@ impl App {
                     .about("List all secrets")
                     .alias("ls"),
             )
-            .subcommand(ClapCommand::new("update").about("Upate a secret"))
+            .subcommand(
+                ClapCommand::new("update")
+                    .about("Upate a secret")
+                    .arg(Arg::new("name").takes_value(true).index(1)),
+            )
             .subcommand(
                 ClapCommand::new("delete")
                     .about("Delete a secret")
@@ -74,10 +79,10 @@ impl App {
         let matches = Box::leak(options.clone().get_matches().into());
 
         match matches.subcommand() {
-            Some(("add", _)) => Command::Add(None),
+            Some(("add", sub)) => Command::Add(sub.values_of("name")),
             Some(("get", sub)) => Command::Get(sub.values_of("name")),
             Some(("list", _)) => Command::List(None),
-            Some(("update", _)) => Command::Update(None),
+            Some(("update", sub)) => Command::Update(sub.values_of("name")),
             Some(("delete", sub)) => Command::Delete(sub.values_of("name")),
             _ => {
                 println!("No command specified");
