@@ -8,7 +8,7 @@ readme = "README.md"
 homepage = "https://github.com/AnishDe12020/secli#readme"
 keywords = ["secrets", "keys", "secret-management"]
 categories = ["command-line-utilities", "command-line-interface"]
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [[bin]]
