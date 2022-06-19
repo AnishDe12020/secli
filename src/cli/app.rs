@@ -43,7 +43,12 @@ impl App {
             .subcommand(
                 ClapCommand::new("add")
                     .about("Add a secret")
-                    .arg(Arg::new("name").takes_value(true).index(1))
+                    .arg(
+                        Arg::new("name")
+                            .takes_value(true)
+                            .index(1)
+                            .help("Name of the secret"),
+                    )
                     .alias("new")
                     .alias("insert")
                     .alias("create"),
@@ -51,7 +56,12 @@ impl App {
             .subcommand(
                 ClapCommand::new("get")
                     .about("Get a secret")
-                    .arg(Arg::new("name").takes_value(true).index(1))
+                    .arg(
+                        Arg::new("name")
+                            .takes_value(true)
+                            .index(1)
+                            .help("Name of the secret"),
+                    )
                     .alias("read")
                     .alias("show"),
             )
@@ -61,14 +71,22 @@ impl App {
                     .alias("ls"),
             )
             .subcommand(
-                ClapCommand::new("update")
-                    .about("Upate a secret")
-                    .arg(Arg::new("name").takes_value(true).index(1)),
+                ClapCommand::new("update").about("Upate a secret").arg(
+                    Arg::new("name")
+                        .takes_value(true)
+                        .index(1)
+                        .help("Name of the secret"),
+                ),
             )
             .subcommand(
                 ClapCommand::new("delete")
                     .about("Delete a secret")
-                    .arg(Arg::new("name").takes_value(true).index(1))
+                    .arg(
+                        Arg::new("name")
+                            .takes_value(true)
+                            .index(1)
+                            .help("Name of the secret"),
+                    )
                     .alias("remove"),
             )
     }
