@@ -1,8 +1,19 @@
-# secli
+# Storli
+<div align="center">
+<img src="https://user-images.githubusercontent.com/63192115/174482213-e726fe0e-0524-4775-9804-819b8bacb91b.png" alt="logo" height="128" width="128" />
+  <br />
+  
+  <p align="center">
+  <img src="https://img.shields.io/crates/v/secli"> <img src="https://img.shields.io/crates/d/secli" /> <img src="https://img.shields.io/github/license/AnishDe12020/secli?color=blue"> <img src="https://img.shields.io/tokei/lines/github/AnishDe12020/secli?color=pink&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/AnishDe12020/secli?color=%230xfffff">
+</p>
 
-A CLI to store secrets locally.
+**A CLI to store secrets locally**
+  
+  
+  </div>
+ <br />
 
-## Why this?
+## Why secli?
 
 If you use a plugin that displays suggestions for commands (like [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions)), it poses a security risk as the secret can be exposed as a part of the suggestion. There are however more use cases, like when you are recording a tutorial, you can use `secli` instead of exposing a secret.
 
