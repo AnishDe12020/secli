@@ -11,7 +11,10 @@ pub fn get(app: App, args: Option<Values<'_>>) -> Result<()> {
     let mut args = args.unwrap_or_default();
 
     let name: String = if args.len() == 0 {
-        Text::new("Name:").prompt().unwrap()
+        match Text::new("Name:").prompt() {
+            Ok(name) => name,
+            Err(_) => return Ok(()),
+        }
     } else {
         args.next().unwrap().to_string()
     };

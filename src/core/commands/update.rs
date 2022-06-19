@@ -9,13 +9,15 @@ use rusqlite::Connection;
 pub fn update(app: App, _args: Option<Values>) -> Result<()> {
     let conn = Connection::open(app.db_path).unwrap();
 
-    let name = Text::new("Enter the name/key for this secret:")
-        .prompt()
-        .unwrap();
+    let name = match Text::new("Enter the name/key for this secret:").prompt() {
+        Ok(name) => name,
+        Err(_) => return Ok(()),
+    };
 
-    let value = Text::new("Enter the value for this secret:")
-        .prompt()
-        .unwrap();
+    let value = match Text::new("Enter the value for this secret:").prompt() {
+        Ok(value) => value,
+        Err(_) => return Ok(()),
+    };
 
     let secret = Secret { name, value };
 
