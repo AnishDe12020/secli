@@ -2,6 +2,14 @@
 
 A CLI to store secrets locally.
 
+## Why this?
+
+If you use a plugin that displays suggestions for commands (like [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions)), it poses a security risk as the secret can be exposed as a part of the suggestion. There are however more use cases, like when you are recording a tutorial, you can use `secli` instead of exposing a secret.
+
+## Is it secure?
+
+All secrets are locally stored in your data directory in a sqlite database. The app is completely offline and no data is sent across the internet. It is also open-source so you can have a look at the source code :)
+
 ## Usage
 
 ```sh-session
