@@ -12,6 +12,8 @@
   
   </div>
  <br />
+ 
+ <a href="https://www.producthunt.com/posts/secli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-secli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=349960&theme=dark" alt="Secli - A&#0032;CLI&#0032;to&#0032;store&#0032;secrets&#0032;locally | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 ## Why secli?
 
