@@ -1,4 +1,4 @@
-# Storli
+# Secli
 <div align="center">
 <img src="https://user-images.githubusercontent.com/63192115/174482213-e726fe0e-0524-4775-9804-819b8bacb91b.png" alt="logo" height="128" width="128" />
   <br />
